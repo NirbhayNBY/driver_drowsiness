@@ -1,0 +1,15 @@
+{
+  "class_names": [
+    "Closed",
+    "Open",
+    "no_yawn",
+    "yawn"
+  ],
+  "class_to_idx": {
+    "Closed": 0,
+    "Open": 1,
+    "no_yawn": 2,
+    "yawn": 3
+  },
+  "img_size": 64
+}

@@ -1,0 +1,13 @@
+# =====================================================
+# Driver Drowsiness Detection -- Requirements
+# =====================================================
+# Install all dependencies with:
+#   pip install -r requirements.txt
+# =====================================================
+
+torch
+torchvision
+opencv-python
+numpy
+matplotlib
+Pillow
