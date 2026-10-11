@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f5f0">
+  <title>DriveAware — Drowsiness Monitor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="DriveAware home">
+        <span class="brand-mark" aria-hidden="true">D</span>
+        <span>drive<span class="brand-light">aware</span></span>
+      </a>
+      <div class="local-badge"><span></span> PRIVATE · RUNNING LOCALLY</div>
+    </header>
+
+    <main>
+      <section class="intro">
+        <p class="eyebrow">DRIVER SAFETY SYSTEM <span>·</span> LIVE MONITOR</p>
+        <h1>A little more aware.<br><span>A lot safer.</span></h1>
+        <p class="intro-copy">Stay alert on every mile. Your camera checks for signs of fatigue in real time.</p>
+      </section>
+
+      <section class="monitor-grid" aria-label="Live driver monitor">
+        <div class="camera-card">
+          <div class="card-heading">
+            <div>
+              <p class="card-label">CAMERA FEED</p>
+              <h2>Driver monitor</h2>
+            </div>
+            <span class="live-pill" id="live-pill"><span></span> STANDBY</span>
+          </div>
+          <div class="camera-stage" id="camera-stage">
+            <video id="camera" autoplay muted playsinline aria-label="Live webcam feed"></video>
+            <canvas id="frame-canvas" hidden></canvas>
+            <div class="camera-placeholder" id="camera-placeholder">
+              <div class="camera-icon" aria-hidden="true">
+                <svg viewBox="0 0 48 48" fill="none"><rect x="5" y="12" width="27" height="24" rx="5"/><path d="m32 20 11-6v20l-11-6z"/></svg>
+              </div>
+              <p>Your camera feed will appear here</p>
+              <span>Camera access stays on this device</span>
+            </div>
+            <div class="camera-corner camera-corner-tl"></div>
+            <div class="camera-corner camera-corner-tr"></div>
+            <div class="camera-corner camera-corner-bl"></div>
+            <div class="camera-corner camera-corner-br"></div>
+          </div>
+          <div class="camera-footer">
+            <p id="camera-message" role="status">Start monitoring to begin your session.</p>
+            <div class="actions">
+              <button class="button button-secondary" id="stop-button" type="button" disabled>Stop</button>
+              <button class="button button-primary" id="start-button" type="button">
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4.8v10.4L15.3 10 7 4.8Z"/></svg>
+                Start monitoring
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <aside class="insights-card">
+          <div class="card-heading">
+            <div>
+              <p class="card-label">LIVE INSIGHTS</p>
+              <h2>Driver status</h2>
+            </div>
+            <span class="pulse-dot" aria-hidden="true"></span>
+          </div>
+
+          <div class="status-banner" id="status-banner" data-state="idle">
+            <span class="status-icon" id="status-icon" aria-hidden="true">—</span>
+            <div><span class="status-caption">CURRENT STATUS</span><strong id="overall-status">Ready when you are</strong></div>
+          </div>
+
+          <div class="metric-list">
+            <div class="metric-row">
+              <span class="metric-symbol eye-symbol" aria-hidden="true">◉</span>
+              <div class="metric-copy"><span>Eye state</span><strong id="eye-status">Waiting</strong></div>
+              <span class="confidence" id="eye-confidence">—</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-symbol mouth-symbol" aria-hidden="true">◡</span>
+              <div class="metric-copy"><span>Mouth state</span><strong id="mouth-status">Waiting</strong></div>
+              <span class="confidence" id="mouth-confidence">—</span>
+            </div>
+          </div>
+
+          <div class="session-box">
+            <span class="session-label">SESSION DURATION</span>
+            <strong id="session-time">00:00</strong>
+          </div>
+
+          <p class="disclaimer">This tool is an assistive demo and is not a substitute for rest or safe driving practices.</p>
+        </aside>
+      </section>
+
+      <section class="how-it-works">
+        <span class="how-icon" aria-hidden="true">✳</span>
+        <p><strong>On-device by design.</strong> Camera frames are analyzed locally and are never saved or uploaded.</p>
+        <span class="how-separator"></span>
+        <p class="how-tip">Good lighting helps improve detection.</p>
+      </section>
+    </main>
+
+    <footer><span>DRIVEAWARE</span><span>LOOK OUT FOR THE ROAD AHEAD.</span></footer>
+  </div>
+</body>
+</html>

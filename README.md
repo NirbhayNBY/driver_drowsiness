@@ -14,7 +14,7 @@ A real-time **Driver Drowsiness Detection System** built with Python, using a **
 | **Sleeping Alert** | Alarm + visual warning when eyes stay closed |
 | **Yawn Warning** | Beep + on-screen alert when yawning detected |
 | **Confidence Score** | Shows prediction label + confidence % on screen |
-| **Alarm Sound** | Windows beep alarm (no external files needed) |
+| **Alarm Sound** | Browser alert tones in the web dashboard; custom alarm in the desktop app |
 
 ---
 
@@ -37,6 +37,10 @@ driver_drowsiness/
 |
 +-- train_model.py                # Model training script (PyTorch)
 +-- detect_drowsiness.py          # Real-time detection script
++-- web_app.py                    # Local webcam dashboard server
++-- drowsiness_model.py           # Shared CNN architecture
++-- templates/index.html          # Web dashboard
++-- static/                       # Dashboard styles and behavior
 +-- requirements.txt              # Python dependencies
 +-- README.md                     # This file
 |
@@ -63,6 +67,7 @@ driver_drowsiness/
 | `numpy` | Numerical operations |
 | `matplotlib` | Training result plots |
 | `Pillow` | Image processing |
+| `Flask` | Local web dashboard |
 
 ---
 
@@ -94,7 +99,20 @@ python train_model.py
 
 Training time: ~5-15 minutes (depends on your hardware, faster with GPU)
 
-### Step 3: Run Real-Time Detection
+### Step 3: Start the Web Dashboard
+
+Run the local dashboard server:
+
+```bash
+python web_app.py
+```
+
+Open **http://127.0.0.1:5000** in your browser and select **Start monitoring**.
+Allow camera access when prompted. The browser sends camera frames only to this
+local server for analysis; frames are not saved or uploaded. The trained model
+and `class_labels.json` from Step 2 are required.
+
+### Step 4: Run Real-Time Detection
 
 After training is complete, start the drowsiness detection:
 
@@ -110,7 +128,7 @@ python detect_drowsiness.py
 - Shows prediction label and confidence on screen
 - Triggers alarm if drowsiness is detected
 
-### Step 4: Test the Alerts
+### Step 5: Test the Alerts
 
 | Action | Expected Alert |
 |--------|---------------|
@@ -118,7 +136,7 @@ python detect_drowsiness.py
 | Yawn / open mouth wide | **"DRIVER IS DROWSY!"** + warning beep |
 | Keep eyes open normally | **"Status: ACTIVE"** |
 
-### Step 5: Quit
+### Step 6: Quit
 
 Press **`q`** on the keyboard to stop the detection and close the camera.
 
