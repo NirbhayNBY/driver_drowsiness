@@ -17,3 +17,4 @@ htmlcov/
 
 # Local audio assets
 *.wav
+!/COMCell_Iphone ringtone alarm (ID 0451)_BigSoundBank.com.wav

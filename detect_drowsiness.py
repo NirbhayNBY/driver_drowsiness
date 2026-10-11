@@ -39,6 +39,7 @@ import torch.nn as nn
 from torchvision import transforms
 
 import winsound
+ALARM_SOUND = r"COMCell_Iphone ringtone alarm (ID 0451)_BigSoundBank.com.wav"
 
 # =====================================================
 # 1. CONFIGURATION -- Tweak these values if needed
@@ -59,9 +60,6 @@ EYE_CLOSED_THRESHOLD = 15
 YAWN_THRESHOLD = 5
 
 # Alarm sound settings (Windows beep)
-ALARM_FREQ = 2500       # Frequency in Hz (higher = more urgent)
-ALARM_DURATION = 1000    # Duration in milliseconds
-
 # Colours in BGR format (OpenCV uses BGR, not RGB)
 GREEN  = (0, 255, 0)
 RED    = (0, 0, 255)
@@ -266,14 +264,14 @@ import os
 
 alarm_state = [False]
 
-def play_alarm_sound(frequency=ALARM_FREQ, duration=ALARM_DURATION):
+def play_alarm_sound():
     if alarm_state[0]:
         return
 
     def _play():
         alarm_state[0] = True
         try:
-            winsound.Beep(frequency, duration)
+            winsound.PlaySound(ALARM_SOUND, winsound.SND_FILENAME)
         except Exception as e:
             print("Audio Error:", e)
         finally:
@@ -474,12 +472,12 @@ while True:
     if eye_closed_counter >= EYE_CLOSED_THRESHOLD:
         draw_text_with_bg(frame, "DRIVER IS SLEEPING! WAKE UP!",
                           (10, 60), RED, font_scale=0.8, thickness=2)
-        play_alarm_sound(ALARM_FREQ, ALARM_DURATION)
+        play_alarm_sound()
 
     elif yawn_counter >= YAWN_THRESHOLD:
         draw_text_with_bg(frame, "DRIVER IS DROWSY!",
                           (10, 60), ORANGE, font_scale=0.8, thickness=2)
-        play_alarm_sound(1800, 500)
+        play_alarm_sound()
 
     else:
         draw_text_with_bg(frame, "Status: ACTIVE", (10, 60),
